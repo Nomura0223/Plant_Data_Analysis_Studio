@@ -11,7 +11,7 @@ st.set_page_config(
 
 # メイン画面 -------------------
 
-st.title('🤖 Plant Data Analysis Studio 🤖', anchor='top')
+st.title('Plant Data Analysis Studio', anchor='top')
 
 image = Image.open('image.jpg')
 st.image(image, use_column_width=True)
