@@ -5,12 +5,6 @@ import os
 import streamlit as st
 from glob import glob
 
-# def load_data(file_path):
-#     """Load data from a given CSV file path."""
-#     if file_path:
-#         return pd.read_csv(file_path)
-#     return None
-
 # データのロードと前処理
 def load_data(file_path, reduce_data=False):
     """
@@ -30,7 +24,7 @@ def load_data(file_path, reduce_data=False):
         df = df.iloc[::interval, :]
     return df
 
-def setup_streamlit(reduce_data=False):
+
     """Configure the Streamlit page and sidebar for file selection."""
     # Adjust the width of the Streamlit page
     st.set_page_config(page_title="Data Analysis with PyGWalker", layout="wide")

@@ -4,6 +4,14 @@ import os
 from glob import glob
 import time
 
+# ユーザー定義のライブラリをインポート
+from library import variables as var
+from library import functions as func
+
+# define variables
+var.operating_directory = "./data/operating_data/"
+var.tag_directory = "./data/tag_info/"
+
 def select_file(directory):
     """
     ディレクトリからファイルを選択する関数
@@ -14,27 +22,6 @@ def select_file(directory):
         return selected_file
     else:
         st.write("No files found.")
-        return None
-
-def view_data(selected_file, data_type):
-    """
-    選択されたファイルのデータを表示する関数
-    """
-    if selected_file:
-        df = pd.read_csv(selected_file, header=0, index_col=0)
-        st.subheader(f"View: {data_type}", divider='rainbow')
-
-        st.subheader(f"The {data_type} Selected:")
-        st.dataframe(df)
-        st.write(f"Shape of the data: {df.shape}")
-
-        # データタイプが "Operating Data" の場合、統計概要を表示
-        if data_type == "Operating Data":
-            st.subheader("Statistical Summary:")
-            st.dataframe(df.describe())
-
-        return df
-    else:
         return None
 
 def delete_data(selected_file):
@@ -60,7 +47,7 @@ def manage_data_view(directory, data_type):
     """
     selected_file = select_file(directory)
     if selected_file:
-        df = view_data(selected_file, data_type)
+        func.view_data(selected_file, data_type)
         delete_data(selected_file)
 
 # タイトルの設定
@@ -71,6 +58,6 @@ view_type = st.selectbox("Select the type of data to view:", ["1_Operating Data"
 
 # データ管理プロセス
 if view_type == "1_Operating Data":
-    manage_data_view("./data/operating_data/", "Operating Data")
+    manage_data_view(var.operating_dir, "Operating Data")
 elif view_type == "2_Tag Information":
-    manage_data_view("./data/tag_info/", "Tag Information")
+    manage_data_view(var.tag_dir, "Tag Information")
