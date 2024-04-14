@@ -4,6 +4,12 @@ import streamlit as st
 from glob import glob
 import os
 
+# ユーザー定義のライブラリをインポート
+from library import variables as var
+from library import functions as func
+from library import config
+config.set_page_config()
+
 # define variables
 directory = "./data/operating_data/"
 

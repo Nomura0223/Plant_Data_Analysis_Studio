@@ -2,19 +2,20 @@
 import streamlit as st
 # import google.generativeai as genai
 from PIL import Image
-
+from library import config
 # ページの設定 ----------------------------
-st.set_page_config(
-    page_title="Plant Data Analysis Studio",
-    page_icon="🤖",
-)
+
+config.set_page_config()
+
 
 # メイン画面 -------------------
 
 st.title('Plant Data Analysis Studio', anchor='top')
 
 image = Image.open('image.jpg')
-st.image(image, use_column_width=True)
+st.image(image, 
+        use_column_width=True
+        )
 
 st.sidebar.success("Select the functions above.")
 

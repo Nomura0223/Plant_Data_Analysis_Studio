@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import os
 from glob import glob
+from library import config
+config.set_page_config()
+
 
 # ディレクトリの指定
 save_directory = "./data/operating_data/"

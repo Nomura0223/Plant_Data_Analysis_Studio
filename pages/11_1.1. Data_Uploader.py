@@ -6,6 +6,8 @@ import numpy as np
 # ユーザー定義のライブラリをインポート
 from library import variables as var
 from library import functions as func
+from library import config
+config.set_page_config()
 
 def upload_file(data_type, upload_key):
     """

@@ -6,6 +6,12 @@ import os
 from glob import glob
 import plotly.graph_objs as go
 
+# ユーザー定義のライブラリをインポート
+from library import variables as var
+from library import functions as func
+from library import config
+config.set_page_config()
+
 
 # データのロードと前処理
 def load_data(file_path, reduce_data=False):

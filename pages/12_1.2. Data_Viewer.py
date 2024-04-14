@@ -7,6 +7,8 @@ import time
 # ユーザー定義のライブラリをインポート
 from library import variables as var
 from library import functions as func
+from library import config
+config.set_page_config()
 
 # define variables
 var.operating_directory = "./data/operating_data/"
