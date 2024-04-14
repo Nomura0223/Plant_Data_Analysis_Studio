@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import os
+import glob
 import streamlit as st
 
 # データのロードと前処理
@@ -20,6 +22,7 @@ def load_data(file_path, reduce_data=False):
     return df
 
 
+# データの表示
 def view_data(selected_file, data_type):
     """
     選択されたファイルのデータを表示する関数
@@ -36,3 +39,16 @@ def view_data(selected_file, data_type):
         if data_type == "Operating Data":
             st.subheader("Statistical Summary:")
             st.dataframe(df.describe())
+
+# データの保存
+def save_data(df, data_type, save_directory):
+    """
+    データの保存を行う関数
+    """
+    st.subheader(f"Save: {data_type}", divider='rainbow')
+    save_file_name = st.text_input(f"Type file name for {data_type.lower()}")
+    
+    if st.button(f"Save {data_type}"):
+        save_path = os.path.join(save_directory, save_file_name + ".csv")
+        df.to_csv(save_path, index=True)
+        st.success(f"{data_type} file has been saved to {save_path}.")

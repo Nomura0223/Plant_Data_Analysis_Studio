@@ -58,11 +58,4 @@ if st.button('Combine Files', on_click=combine_files):
         st.dataframe(st.session_state.combined_df.describe())
 
 # 保存機能
-save_file_name = st.text_input('Enter a name for the combined file (without extension)')
-if st.button('Save Combined File') and st.session_state.combined_df is not None:
-    if save_file_name:
-        save_path = os.path.join(save_directory, save_file_name + ".csv")
-        st.session_state.combined_df.to_csv(save_path)
-        st.success(f'Combined file saved as {save_path}.')
-    else:
-        st.error('Please enter a file name.')
+func.save_data(st.session_state.combined_df, "Combined Data", save_directory)

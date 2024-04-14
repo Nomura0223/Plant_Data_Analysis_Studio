@@ -1,28 +1,30 @@
 # ライブラリのインポート -------------------
 import streamlit as st
-# import google.generativeai as genai
 from PIL import Image
 from library import config
-# ページの設定 ----------------------------
 
+# ページの設定 ----------------------------
 config.set_page_config()
 
-
 # メイン画面 -------------------
-
 st.title('Plant Data Analysis Studio', anchor='top')
 
 image = Image.open('image.jpg')
-st.image(image, 
-        use_column_width=True
-        )
+st.image(image, use_column_width=True)
 
-st.sidebar.success("Select the functions above.")
+# サイドバーの設定
+st.sidebar.success("Select pages above to start!")
 
-st.markdown(
-    """
-    Plant Data Analysis Studio へようこそ！
-    このアプリケーションは、プラントエンジニア向けデータ分析プラットフォームです。\n
-    👈 サイドバーから実施したい業務プロセス処理を選択して、機能の例を体験下さい！
-    """
-)
+# アプリケーション説明
+st.markdown("""
+    ### Overview
+    Welcome to Plant Data Analysis Studio! This application is a data analysis platform for plant engineers. You can upload data, conduct analyses, and gain insights.
+
+    ### Key Features
+    - **Data Upload**: Upload CSV or Excel files and start analyzing immediately.
+    - **Interactive Analysis Tools**: Use various tools to visualize and analyze data.
+    - **Report Generation**: Export your analysis results as a report and share it.
+
+    ### Updates
+    - April 12, 2024: Added new visual analysis tools.
+""")

@@ -17,18 +17,6 @@ def upload_file(data_type, upload_key):
     uploaded_file = st.file_uploader(f"Please upload the {data_type.lower()}.", type=['csv'], key=upload_key)
     return uploaded_file # アップロードされたファイルを返す
 
-def save_data(df, data_type, save_directory):
-    """
-    データの保存を行う関数
-    """
-    st.subheader(f"Save: {data_type}", divider='rainbow')
-    save_file_name = st.text_input(f"Type file name for {data_type.lower()}")
-    
-    if st.button(f"Save {data_type}"):
-        save_path = os.path.join(save_directory, save_file_name + ".csv")
-        df.to_csv(save_path, index=True)
-        st.success(f"{data_type} file has been saved to {save_path}.")
-
 def process_data_upload_with_upload_key(data_type, save_directory, upload_key):
     """
     アップロードされたファイルの処理を行う関数
@@ -46,7 +34,7 @@ def process_data_upload_with_upload_key(data_type, save_directory, upload_key):
             st.subheader("Statistical Summary:")
             st.dataframe(df.describe())
         
-        save_data(df, data_type, save_directory)
+        func.save_data(df, data_type, save_directory)
 
 # タイトルの設定
 st.title('Data Uploader')
