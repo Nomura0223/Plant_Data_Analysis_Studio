@@ -8,7 +8,7 @@ import os
 from library import variables as var
 from library import functions as func
 from library import config
-config.set_page_config()
+config.set_page_config(layout="wide")
 
 # define variables
 directory = "./data/operating_data/"
@@ -26,11 +26,6 @@ def select_file(directory):
         return None
 
 
-# Streamlitページの幅を調整する
-st.set_page_config(
-    layout="wide"
-)
- 
 # PyGWalkerとStreamlitの通信を確立する
 init_streamlit_comm()
  
