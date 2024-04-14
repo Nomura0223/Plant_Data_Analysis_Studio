@@ -6,7 +6,10 @@ import os
 from glob import glob
 
 # データのロードと前処理
-def load_data(file_path):
+def load_data(file_path, reduce_data=False):
+    """
+    データのロードと前処理
+    """
     try:
         # 日付時刻形式に変換を試みる
         df = pd.read_csv(file_path, header=0, parse_dates=[0], index_col=0)
@@ -14,10 +17,11 @@ def load_data(file_path):
         # 変換が失敗した場合は通常のインデックスとして読み込む
         df = pd.read_csv(file_path, header=0, index_col=0)
     
-    # データが多い場合は間引いて表示
-    num_rows = len(df)
-    interval = max(1, np.floor(num_rows / 100).astype(int))
-    df = df.iloc[::interval, :]
+    if reduce_data:
+        # データが多い場合は間引いて表示
+        num_rows = len(df)
+        interval = max(1, np.floor(num_rows / 100).astype(int))
+        df = df.iloc[::interval, :]
     return df
 
 
@@ -43,6 +47,7 @@ def drawGraphImages(df, tag_info):
 
 
         ax2.hist(y.dropna(), bins=50, orientation='horizontal', color='#1d2088')
+        ax2.axhline(y=tag_info.loc[i, 'Design Value'], linewidth=2.0, color='#ff4b00', label='Design')
         ax1.legend(loc='upper right', framealpha = 0.8, facecolor="white", frameon=True, handlelength=1, fontsize=10)
         ax3.boxplot(y.dropna(), widths=0.7)
         st.pyplot(fig)
@@ -62,7 +67,7 @@ def main():
     selected_file2 = st.selectbox("Tag情報データを選択してください", tag_info_files, key="file2")
 
     if selected_file1 and selected_file2:
-        df1 = load_data(selected_file1)
+        df1 = load_data(selected_file1, reduce_data=True)
         df2 = pd.read_csv(selected_file2, header=0)
 
         st.write("時系列データ:")
