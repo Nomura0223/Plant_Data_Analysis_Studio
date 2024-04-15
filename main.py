@@ -15,16 +15,20 @@ st.image(image, use_column_width=True)
 # サイドバーの設定
 st.sidebar.success("Select pages above to start!")
 
-# アプリケーション説明
+# st.header("", divider="blue")
+
 st.markdown("""
     ### Overview
     Welcome to Plant Data Analysis Studio! This application is a data analysis platform for plant engineers. You can upload data, conduct analyses, and gain insights.
 
     ### Key Features
-    - **Data Upload**: Upload CSV or Excel files and start analyzing immediately.
-    - **Interactive Analysis Tools**: Use various tools to visualize and analyze data.
-    - **Report Generation**: Export your analysis results as a report and share it.
+    - **Data Upload**: Upload CSV files and start analyzing immediately.
+    - **Data Viewer**: View uploaded data, download files, and delete data.
+    - **Interactive Data Analysis**: Use various tools to visualize and analyze data.
+    - **Machine Learning**: Train and test machine learning models on your data.
 
     ### Updates
     - April 12, 2024: Added new visual analysis tools.
 """)
+
+st.header("", divider="blue")

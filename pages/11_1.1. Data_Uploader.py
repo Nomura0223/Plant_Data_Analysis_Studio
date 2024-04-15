@@ -41,9 +41,10 @@ st.title('Data Uploader')
 
 # アップロードタイプの選択
 upload_type = st.selectbox("Select the type of data to upload:", 
-                           ["1_Operating Data", "2_Tag Information"])
+                           ["1_Operating Data", "2_Design Information"])
 
 if upload_type == "1_Operating Data":
     process_data_upload_with_upload_key("Operating Data", var.operating_dir, "operating_data")
-elif upload_type == "2_Tag Information":
-    process_data_upload_with_upload_key("Tag Information", var.tag_dir, "tag_info")
+elif upload_type == "2_Design Information":
+    # process_data_upload_with_upload_key("Tag Information", var.tag_dir, "tag_info")
+    process_data_upload_with_upload_key("Design Information", var.design_dir, "design_info")

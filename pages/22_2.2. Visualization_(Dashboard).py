@@ -26,9 +26,9 @@ def select_file(directory):
 
 # タイトルを追加
 st.title("Visualization Dashboard")
+st.write("This page provides interactive visualization capabilities for data analysis.")
 
-# 設定
-st.write("This is a dashboard for exploring data analysis.")
+st.subheader("Load: Data", divider='rainbow')
 
 # データのロードと前処理
 selected_file = select_file(var.operating_dir)
@@ -36,9 +36,13 @@ if selected_file:
     # ページをリロード
     df = func.load_data(selected_file, reduce_data=False)
     # df = pd.read_csv(selected_file, header=0)
-    st.dataframe(df)
 
-if st.button("Open Visualization Dashboard", key="open_dashboard"):
+    if st.checkbox("Show data"):
+        st.dataframe(df)
+
+st.subheader("Visualize:", divider='rainbow')
+
+if st.button("Open Dashboard", key="open_dashboard"):
     # PyGWalkerとStreamlitの通信を確立する
     init_streamlit_comm()
  

@@ -30,7 +30,8 @@ def view_data(selected_file, data_type):
         df = pd.read_csv(selected_file, header=0, index_col=0)
         st.subheader(f"View: {data_type}", divider='rainbow')
 
-        st.subheader(f"The {data_type} Selected:")
+        st.subheader("The File Loaded:")
+        # st.subheader(f"The Data{data_type} Selected:")
         st.dataframe(df)
         st.write(f"Shape of the data: {df.shape}")
 
@@ -42,12 +43,18 @@ def view_data(selected_file, data_type):
 # データの保存
 def save_data(df, data_type, save_directory):
     """
-    データの保存を行う関数
+    データの保存を行う関数。指定されたディレクトリが存在しない場合は、ディレクトリを作成する。
     """
     st.subheader(f"Save: {data_type}", divider='rainbow')
     save_file_name = st.text_input(f"Type file name for {data_type.lower()}")
-    
-    if st.button(f"Save {data_type}"):
+
+    if st.button(f"Save"):
+        # ディレクトリが存在するか確認し、存在しない場合は作成する
+        if not os.path.exists(save_directory):
+            os.makedirs(save_directory)
+            st.info(f"Created directory: {save_directory}")
+
+        # データをCSVファイルとして保存
         save_path = os.path.join(save_directory, save_file_name + ".csv")
         df.to_csv(save_path, index=True)
         st.success(f"{data_type} file has been saved to {save_path}.")

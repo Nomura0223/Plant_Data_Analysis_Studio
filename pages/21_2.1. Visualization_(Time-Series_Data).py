@@ -83,27 +83,36 @@ def drawGraphImages_interactive(df, tag_info):
 # メイン関数
 def main():
     st.title('Visualization of Time Series Data')
+    st.write("This page is for visualizing time-series data.")
 
-    operating_data_directory = "./data/operating_data/"
-    tag_info_directory = "./data/tag_info/"
-    
-    operating_files = glob(os.path.join(operating_data_directory, '*.csv'))
-    tag_info_files = glob(os.path.join(tag_info_directory, '*.csv'))
-    
+   
+    operating_files = glob(os.path.join(var.operating_dir, '*.csv'))
+    tag_info_files = glob(os.path.join(var.design_dir, '*.csv'))
+
+    st.subheader("Load: Data", divider='rainbow')
+
+    col1, col2 = st.columns(2)
     # ファイル選択のドロップダウンメニュー
-    selected_file1 = st.selectbox("Please select the file for time series data:", operating_files, key="file1")
-    selected_file2 = st.selectbox("Please select the file for tag information data:", tag_info_files, key="file2")
+    with col1:
+        selected_file1 = st.selectbox("1_Operating Data: Please select the file of the operating data (time series data):", operating_files, key="file1")
+    with col2:
+        selected_file2 = st.selectbox("2_Design Infomation: Please select the file of the design information data:", tag_info_files, key="file2")
+
+    # st.write("")
 
     if selected_file1 and selected_file2:
         df1 = load_data(selected_file1, reduce_data=True)
         df2 = pd.read_csv(selected_file2, header=0)
-        st.subheader("View: Operating / Tag Information Data", divider='rainbow')
+        st.subheader("View: Operating / Design Information Data", divider='rainbow')
 
-        st.write("Operating Data:")
-        st.write(df1.head())
-
-        st.write("Tag Information Data:")
-        st.write(df2.head())
+        col1, col2 = st.columns(2)
+        # col1, col2 = st.columns([0.66, 0.33])
+        with col1:
+            st.write("Operating Data:")
+            st.write(df1)
+        with col2:
+            st.write("Design Information:")
+            st.write(df2)
 
         st.subheader("Visualize: Time-Series Data", divider='rainbow')
         vis_type = st.radio("Select the visualization type:", ['Static', 'Interactive'])

@@ -41,7 +41,9 @@ def select_file(directory):
         st.write("No files found.")
         return None
 
-st.title("Plant Data Analysis Dashboard")
+st.title("Build a Machine Learning Regression Model")
+st.write("This page allows you to build a machine learning model for regression analysis.")
+st.subheader("Load: Data", divider='rainbow')
 
 selected_file = select_file(var.operating_dir)
 if selected_file:
@@ -50,13 +52,16 @@ if selected_file:
 if df is not None and st.checkbox("Show data"):
     st.write(df)
 
-    all_columns = df.columns.tolist()
-    inputs = st.multiselect("Select input features", all_columns, default=all_columns[:-1])
-    output = st.selectbox("Select target variable", all_columns, index=len(all_columns) - 1)
+st.subheader("Build: Model", divider='rainbow')
 
-    model_type = st.selectbox("Select model type", ["Linear Regression", "Random Forest Regression"])
-    test_size = st.slider("Test Size (%)", min_value=10, max_value=50, value=20, step=5) / 100
+all_columns = df.columns.tolist()
+inputs = st.multiselect("Select input features", all_columns, default=all_columns[:-1])
+output = st.selectbox("Select target variable", all_columns, index=len(all_columns) - 1)
 
+model_type = st.selectbox("Select model type", ["Linear Regression", "Random Forest Regression"])
+test_size = st.slider("Test Size (%)", min_value=10, max_value=50, value=20, step=5) / 100
+
+if st.button("Build Model"):
     if inputs and output:
         X_train, X_test, y_train, y_test = train_test_split(df[inputs], df[output], test_size=test_size, random_state=42)
         
@@ -69,15 +74,12 @@ if df is not None and st.checkbox("Show data"):
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
 
-    
         mse = mean_squared_error(y_test, y_pred)
         r2 = r2_score(y_test, y_pred)
 
-        st.subheader("Model Performance", divider="rainbow")
+        st.subheader("Visualize: Model Performance", divider="rainbow")
         st.write(f"Mean Squared Error (MSE): {mse}")
         st.write(f"R-squared (R2): {r2}")
-
-        # st.subheader("Visualize Model Performance", divider="rainbow")
 
         col1, col2, col3 = st.columns(3)
         
@@ -86,7 +88,6 @@ if df is not None and st.checkbox("Show data"):
             st.plotly_chart(fig, use_container_width=True)
         
         with col2:
-            # 予測と実際の値の比較
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=y_test, y=y_pred, mode='markers', name='Predicted vs Actual', marker=dict(color='LightSkyBlue', opacity=0.5)))
             fig.add_trace(go.Scatter(x=[y_test.min(), y_test.max()], y=[y_test.min(), y_test.max()], mode='lines', name='Ideal Line', line=dict(color='black', dash='dash')))
@@ -94,7 +95,6 @@ if df is not None and st.checkbox("Show data"):
             st.plotly_chart(fig, use_container_width=True)
 
         with col3:
-            # 修正されたグラフのプロット
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=np.arange(len(y_test)), y=y_test.reset_index(drop=True), mode='lines', name='Actual'))
             fig.add_trace(go.Scatter(x=np.arange(len(y_pred)), y=y_pred, mode='lines', name='Predicted'))
