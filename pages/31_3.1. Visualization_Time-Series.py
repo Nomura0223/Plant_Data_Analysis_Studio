@@ -10,7 +10,7 @@ import plotly.graph_objs as go
 from library import variables as var
 from library import functions as func
 from library import config
-config.set_page_config()
+config.set_page_config(layout="wide")
 
 
 # データのロードと前処理
@@ -78,7 +78,7 @@ def drawGraphImages_interactive(df, tag_info):
         )
         
         fig = go.Figure(data=[trace1, trace2], layout=layout)
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
 # メイン関数
 def main():

@@ -21,7 +21,6 @@ def load_data(file_path, reduce_data=False):
         
     return df
 
-
 # データの表示
 def view_data(selected_file, data_type):
     """
