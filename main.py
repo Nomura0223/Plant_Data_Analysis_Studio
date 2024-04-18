@@ -29,6 +29,7 @@ st.markdown("""
 
     ### Updates
     - April 12, 2024: Added new visual analysis tools.
+    - April 16, 2024: Add Regression Tools.
 """)
 
 st.header("", divider="blue")
