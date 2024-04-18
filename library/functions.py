@@ -31,7 +31,6 @@ def view_data(selected_file, data_type):
         st.subheader(f"View: {data_type}", divider='rainbow')
 
         st.subheader("The File Loaded:")
-        # st.subheader(f"The Data{data_type} Selected:")
         st.dataframe(df)
         st.write(f"Shape of the data: {df.shape}")
 
