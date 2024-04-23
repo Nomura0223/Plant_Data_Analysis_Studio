@@ -37,7 +37,7 @@ def process_data_upload_with_upload_key(data_type, save_directory, upload_key):
         func.save_data(df, data_type, save_directory)
 
 # タイトルの設定
-st.title('Data Uploader')
+st.title('Data Management: Uploader')
 
 # アップロードタイプの選択
 upload_type = st.selectbox("Select the type of data to upload:", 

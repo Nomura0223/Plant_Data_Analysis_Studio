@@ -1,0 +1,21 @@
+Tag,Description,Unit,Design Value
+FI_0395_PV,Plant Feed Flowrate,m3/h,1468.6635
+FI_0567_PV,Product A Flowrate,m3/h,4.2482157
+FI_0879_PV,Product B Flowrate,m3/h,285.8925
+FC_0173_PV,Product C Flowrate,m3/h,5.856619
+FI_0497_PV,Product D Flowrate,m3/h,6.1191115
+FI_0396_PV,Reactor A Outlet Flowrate,m3/h,695.507
+FI_0319_PV,Reactor A Inlet Flowrate,m3/h,851.73315
+FC_0756_PV,Vessel A Outlet Flowrate,m3/h,130.94644
+FC_0696_PV,Vessel A Inlet Flowrate,m3/h,132.363
+LC_0493_PV,Liquid Level of Reactor A,m,50.096497
+PD_0272_PV,Pressure Difference of Reactor A,bar,0.3780251
+PI_0922_PV,Vessel A Top Pressure,barG,1.2163486
+PI_0326_PV,Vessel A Bottom Pressure,barG,0.99645
+PC_0163_PV,Reactor A Pressure,barA,11.827758
+FC_0688_OP,Plant Feed Flow Control Valve A Opening,%,57.016136
+FC_0126_OP,Plant Feed Flow Control Valve B Opening,%,70.22235
+FC_0419_OP,Reactor Bypass Line Control Valve Opening,%,-0.28762046
+FC_0971_OP,Reactor A Inlet Control Valve A Opening,%,49.1333
+FC_0749_OP,Reactor A Inlet Control Valve B Opening,%,49.368202
+FC_0336_OP,Vessel A Inlet Control Valve Opening,%,53.573803

@@ -6,8 +6,13 @@ import joblib
 model_path = "saved_model.joblib"
 model, inputs, output, stats = joblib.load(model_path)
 
-st.title("Case Study: Simulate Different Scenarios with the Loaded Model")
+st.title("Machine Learning: Case Study")
+st.write("This page allows you to simulate Different Scenarios with the Loaded Model")
+
+st.subheader("Input: ", divider='rainbow')
 st.write("Adjust the input features based on the statistical defaults to see how the predicted output changes.")
+
+submit_button = None
 
 # 入力用のフォームを作成
 with st.form("input_form"):
@@ -27,11 +32,14 @@ with st.form("input_form"):
             input_data[feature] = value
         col_index = (col_index + 1) % 4  # 次の列へ移動
 
+
     submit_button = st.form_submit_button(label='Predict')
 
-    # 予測実行
-    if submit_button:
-        input_df = pd.DataFrame([input_data])
-        prediction = model.predict(input_df)
-        # 出力結果の強調表示
-        st.markdown(f"### Predicted {output}: `{prediction[0]}`", unsafe_allow_html=True)
+st.subheader("Output: ", divider='rainbow')
+
+# 予測実行
+if submit_button:
+    input_df = pd.DataFrame([input_data])
+    prediction = model.predict(input_df)
+    # 出力結果の強調表示
+    st.subheader(f"Predicted {output}: `{prediction[0]}`")

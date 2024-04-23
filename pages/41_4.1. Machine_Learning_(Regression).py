@@ -41,7 +41,7 @@ def select_file(directory):
         st.write("No files found.")
         return None
 
-st.title("Build a Machine Learning Regression Model")
+st.title("Machine Learning: Build Regression Model")
 st.write("This page allows you to build a machine learning model for regression analysis.")
 st.subheader("Load: Data", divider='rainbow')
 
@@ -103,36 +103,31 @@ if df is not None:
                 fig.update_layout(title="Plot of Predicted vs Actual Data Over Index", xaxis_title="Index", yaxis_title=output)
                 st.plotly_chart(fig, use_container_width=True)
 
-            # # モデルおよび設定の保存
-            # model_path = "saved_model.joblib"
-            # joblib.dump((model, inputs, output), model_path)
-            # st.success(f"Model and configuration saved to {model_path}")
-
             # モデルおよび設定の保存
             model_path = "saved_model.joblib"
             stats = df[inputs].agg(['mean', 'min', 'max']).to_dict()  # 統計情報を計算して辞書として保存
             joblib.dump((model, inputs, output, stats), model_path)
             st.success(f"Model, configuration, and statistics saved to {model_path}")
 
-# モデルが作成された後のシミュレーション部分
-if model:
-    st.subheader("Simulation: Adjust Input Features", divider="rainbow")
+# # モデルが作成された後のシミュレーション部分
+# if model:
+#     st.subheader("Simulation: Adjust Input Features", divider="rainbow")
 
-    # 入力用のフォームを作成
-    with st.form("input_form"):
-        input_data = {}
-        for feature in inputs:
-            # 各説明変数の最小値と最大値をデータから取得して範囲を設定
-            min_val = df[feature].min()
-            max_val = df[feature].max()
-            step = (max_val - min_val) / 100  # ステップサイズを適切に設定
-            default_val = (max_val + min_val) / 2
-            input_data[feature] = st.number_input(f"Set value for {feature}", min_value=min_val, max_value=max_val, value=default_val, step=step)
+#     # 入力用のフォームを作成
+#     with st.form("input_form"):
+#         input_data = {}
+#         for feature in inputs:
+#             # 各説明変数の最小値と最大値をデータから取得して範囲を設定
+#             min_val = df[feature].min()
+#             max_val = df[feature].max()
+#             step = (max_val - min_val) / 100  # ステップサイズを適切に設定
+#             default_val = (max_val + min_val) / 2
+#             input_data[feature] = st.number_input(f"Set value for {feature}", min_value=min_val, max_value=max_val, value=default_val, step=step)
         
-        submit_button = st.form_submit_button(label='Predict')
+#         submit_button = st.form_submit_button(label='Predict')
 
-        # 予測実行
-        if submit_button:
-            input_df = pd.DataFrame([input_data])
-            prediction = model.predict(input_df)
-            st.write(f"Predicted {output}: {prediction[0]}")
+#         # 予測実行
+#         if submit_button:
+#             input_df = pd.DataFrame([input_data])
+#             prediction = model.predict(input_df)
+#             st.write(f"Predicted {output}: {prediction[0]}")

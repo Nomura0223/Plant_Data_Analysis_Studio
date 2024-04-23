@@ -62,8 +62,8 @@ def manage_data_view(directory, data_type):
         delete_data(selected_file)
 
 # タイトルの設定
-st.title('Data Viewer')
 
+st.title('Data Management: Viewer')
 st.subheader("Load: Data", divider='rainbow')
 
 
