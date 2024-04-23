@@ -35,7 +35,6 @@ selected_file = select_file(var.operating_dir)
 if selected_file:
     # ページをリロード
     df = func.load_data(selected_file, reduce_data=False)
-    # df = pd.read_csv(selected_file, header=0)
     st.dataframe(df)
 
 def add_new_column(dataframe, formula, new_column_name):

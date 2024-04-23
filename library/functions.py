@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import glob
 import streamlit as st
+import time
 
 # データのロードと前処理
 def load_data(file_path, reduce_data=False):
@@ -57,3 +58,5 @@ def save_data(df, data_type, save_directory):
         save_path = os.path.join(save_directory, save_file_name + ".csv")
         df.to_csv(save_path, index=True)
         st.success(f"{data_type} file has been saved to {save_path}.")
+        time.sleep(3)
+        st.experimental_rerun()

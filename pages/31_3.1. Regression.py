@@ -16,6 +16,9 @@ config.set_page_config(layout="wide")
 import os
 from glob import glob
 
+
+model = None
+
 def plot_learning_curve(estimator, X, y, title="Learning Curve"):
     train_sizes, train_scores, test_scores = learning_curve(
         estimator, X, y, cv=10, n_jobs=-1,
@@ -100,3 +103,26 @@ if st.button("Build Model"):
             fig.add_trace(go.Scatter(x=np.arange(len(y_pred)), y=y_pred, mode='lines', name='Predicted'))
             fig.update_layout(title="Plot of Predicted vs Actual Data Over Index", xaxis_title="Index", yaxis_title=output)
             st.plotly_chart(fig, use_container_width=True)
+
+# モデルが作成された後に追加
+if model:
+    st.subheader("Simulation: Adjust Input Features", divider="rainbow")
+
+    # 入力用のフォームを作成
+    with st.form("input_form"):
+        input_data = {}
+        for feature in inputs:
+            # 各説明変数の最小値と最大値をデータから取得して範囲を設定
+            min_val = df[feature].min()
+            max_val = df[feature].max()
+            step = (max_val - min_val) / 100  # ステップサイズを適切に設定
+            default_val = (max_val + min_val) / 2
+            input_data[feature] = st.number_input(f"Set value for {feature}", min_value=min_val, max_value=max_val, value=default_val, step=step)
+        
+        submit_button = st.form_submit_button(label='Predict')
+
+        # 予測実行
+        if submit_button:
+            input_df = pd.DataFrame([input_data])
+            prediction = model.predict(input_df)
+            st.write(f"Predicted {output}: {prediction[0]}")

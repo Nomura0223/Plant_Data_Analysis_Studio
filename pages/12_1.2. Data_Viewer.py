@@ -10,10 +10,6 @@ from library import functions as func
 from library import config
 config.set_page_config()
 
-# # define variables
-# var.operating_directory = "./data/operating_data/"
-# var.tag_directory = "./data/tag_info/"
-
 def select_file(directory):
     """
     ディレクトリからファイルを選択する関数
